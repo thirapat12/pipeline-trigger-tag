@@ -36,6 +36,11 @@ jobs:
         echo ${{ env.SHA }} > version.txt
         ls -lrt
         cat version.txt
+        docker push thirapat12/thirapat12:${{ env.SHA }}
+        docker push thirapat12/thirapat12-develop:${{ env.SHA }}
+        docker push thirapat12/thirapat12-staging:${{ env.SHA }}
+        docker push thirapat12/thirapat12-master:${{ env.SHA }}
+
 
 
     
