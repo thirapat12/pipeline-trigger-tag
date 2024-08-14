@@ -30,9 +30,9 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - run: |
         docker pull thirapat12/thirapat12:${{ env.SHA }}
-        docker tag thirapat12/thirapat12${{ env.SHA }} thirapat12/thirapat12-develop:${{ env.SHA }}
-        docker tag thirapat12/thirapat12${{ env.SHA }} thirapat12/thirapat12-staging:${{ env.SHA }}
-        docker tag thirapat12/thirapat12${{ env.SHA }} thirapat12/thirapat12-master:${{ env.SHA }}
+        docker tag thirapat12/thirapat12:${{ env.SHA }} thirapat12/thirapat12-develop:${{ env.SHA }}
+        docker tag thirapat12/thirapat12:${{ env.SHA }} thirapat12/thirapat12-staging:${{ env.SHA }}
+        docker tag thirapat12/thirapat12:${{ env.SHA }} thirapat12/thirapat12-master:${{ env.SHA }}
         echo ${{ env.SHA }} > version.txt
         ls -lrt
         cat version.txt
