@@ -21,7 +21,7 @@ jobs:
         SHA: ${{ steps.short-sha.outputs.sha }}
     - run: echo $SHA
       env:
-        SHA: ${{ env.SHA }}
+        SHA: ${{github.ref_name}}
       
     - name: Login to Docker Hub Private Repository 
       uses: docker/login-action@v2
@@ -30,13 +30,13 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - run: |
-        # docker pull thirapat12/thirapat12:${{ env.SHA }}
-        # docker tag thirapat12/thirapat12:${{ env.SHA }} thirapat12/thirapat12-develop:${{ env.SHA }}
-        # docker tag thirapat12/thirapat12:${{ env.SHA }} thirapat12/thirapat12-staging:${{ env.SHA }}
+        # docker pull thirapat12/thirapat12:${{github.ref_name}}
+        # docker tag thirapat12/thirapat12:${{github.ref_name}} thirapat12/thirapat12-develop:${{github.ref_name}}
+        # docker tag thirapat12/thirapat12:${{github.ref_name}} thirapat12/thirapat12-staging:${{github.ref_name}}
         docker pull node:18-alpine
-        docker tag node:18-alpine thirapat12/thirapat12-develop:${{ env.SHA }}
-        docker tag node:18-alpine thirapat12/thirapat12-staging:${{ env.SHA }}
-        echo ${{ env.SHA }} > version.txt
+        docker tag node:18-alpine thirapat12/thirapat12-develop:${{github.ref_name}}
+        docker tag node:18-alpine thirapat12/thirapat12-staging:${{github.ref_name}}
+        echo ${{github.ref_name}} > version.txt
         ls -lrt
         cat version.txt
     - name: Login to Docker Hub Private Repository to ACR
@@ -46,8 +46,8 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - run: |
-        docker push thirapat12/thirapat12-develop:${{ env.SHA }}
-        docker push thirapat12/thirapat12-staging:${{ env.SHA }}
+        docker push thirapat12/thirapat12-develop:${{github.ref_name}}
+        docker push thirapat12/thirapat12-staging:${{github.ref_name}}
 
 
 
