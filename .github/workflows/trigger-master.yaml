@@ -34,6 +34,7 @@ jobs:
         echo ${{ env.SHA }} > version.txt
         ls -lrt
         cat version.txt
+    - run: |
         docker push thirapat12/thirapat12-master:${{ env.SHA }}
 
 
